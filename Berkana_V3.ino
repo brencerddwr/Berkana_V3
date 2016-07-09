@@ -69,16 +69,11 @@
 // Data pin that led data will be written out over
 #define DATA_PIN 11
 
-// start points for frames  DO NOT CHANGE, THE CURRENT CODE WILL BREAK.
-//#define xstart 1
-//#define ystart 2
-
-
 // define analog color pins for color selector output
 #define REDPIN   5
 #define GREENPIN 6
 #define BLUEPIN  3
-// These #defines make it easy to set the backlight color
+// These #defines make it easy to set the LCD backlight color
 #define RED 0x1
 #define YELLOW 0x3
 #define GREEN 0x2
@@ -90,14 +85,15 @@
 // define the delay between frames in milliseconds.
 long frame_delay = 50;
 
-// define intensity levels
+// define initial intensity levels
 uint8_t high_intensity = 128;
 uint8_t med_intensity = high_intensity * .66;
 uint8_t low_intensity = high_intensity * .33;
+
 // This is an array of leds.  One item for each led in your strip.
 CRGB leds[NUM_LEDS];
 
-// predefined color arrays
+// predefined color arrays (hue,saturation)
 PROGMEM unsigned int colors[][2] = {
 	{
 	64,255                                    }
@@ -123,23 +119,23 @@ PROGMEM unsigned int colors[][2] = {
 
 // main menu
 
-char* main_menu[] = {"Kelley Yellow","Kelley Red","Kelley Blue","Kelley Green","Kelley Purple","Kelley White","Kelley dial","Rainbow chase", "Rainbow cycle", "Frame Delay", "Brightness"};
-int menu_count = 11;
+//char* main_menu[] = {"Kelley Yellow","Kelley Red","Kelley Blue","Kelley Green","Kelley Purple","Kelley White","Kelley dial","Rainbow chase", "Rainbow cycle", "Frame Delay", "Brightness"};
+//int menu_count = 11;
+char* main_menu[] = {"Pattern","Color","Speed"};
+int menu_count = 3;
 
 const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
 int sensorValue = 0;        // value read from the pot
 
 //initialize variables
 
-int x; // variable for first group, counts down and wraps around.
-int y; // variable for second group, counts up.
 unsigned int led_color[2];  //array that holds the current color codes for the LEDS
 int c = 0;
 long last_millis;
 long current_millis;
 int frame_count;
 static uint8_t hue;
-bool kpattern_selected = true;
+/* bool kpattern_selected = true;
 bool chase_selected = false;
 bool cycle_selected = false;
 bool idle = true;
@@ -148,6 +144,7 @@ int menu_active=0;
 int menu_current = menu_active;
 int menu_previous = menu_current;
 long last_button;
+*/
 
 // The shield uses the I2C SCL and SDA pins. On classic Arduinos
 // this is Analog 4 and 5 so you can't use those for analogRead() anymore
@@ -165,21 +162,20 @@ void setup() {
 
 	//	Serial.begin(115200);
 
-	// sanity check delay - allows reprogramming if accidently blowing power w/leds
-	delay(3000);
-
 	// set up the LCD's number of columns and rows:
 	lcd.begin(16, 2);
 	// Print a message to the LCD. We track how long it takes since
 	// this library has been optimized a bit and we're proud of it :)
 	//	int time = millis();
-	lcd.print(F("Berkana"));
+	lcd.print(F("Booting"));
 	//	time = millis() - time;
 	//	Serial.print(F("Took "));
 	//	Serial.print(time);
 	//	Serial.println(F(" ms"));
 	lcd.setBacklight(WHITE);
 
+	// sanity check delay - allows reprogramming if accidently blowing power w/leds
+	delay(3000);
 
 
 	// Change this line as needed to match the LED string type, control chip and color sequence
@@ -196,6 +192,13 @@ void setup() {
 
 	// Flash the "hello" color sequence: R, G, B, black.
 	colorBars();
+	lcd.clear();
+	lcd.setBacklight(GREEN);
+	lcd.setCursor(0,0);
+	lcd.print("Berkana");
+	lcd.setCursor(0,1);
+	lcd.print("Ready");
+	delay (750);
 	last_millis=millis();
 	last_button=millis();
 	frame_count=0;
