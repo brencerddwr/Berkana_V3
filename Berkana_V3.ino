@@ -5,6 +5,7 @@
 //
 // Version 3.0.0
 // complete recode to allow easier addition of patterns and features
+// convert to HSV and redesign UI
 //
 // Version 2.2.3
 // User interface fixed for now, brightness implemented.
