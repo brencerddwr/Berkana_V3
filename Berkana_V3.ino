@@ -66,6 +66,7 @@
 // How many leds are in the strip?
 #define NUM_LEDS 12
 
+
 // Data pin that led data will be written out over
 #define DATA_PIN 11
 
@@ -135,7 +136,7 @@ long last_millis;
 long current_millis;
 int frame_count;
 static uint8_t hue;
-/* bool kpattern_selected = true;
+bool kpattern_selected = true;
 bool chase_selected = false;
 bool cycle_selected = false;
 bool idle = true;
@@ -143,8 +144,9 @@ int kelley_menu_selection = 0;
 int menu_active=0;
 int menu_current = menu_active;
 int menu_previous = menu_current;
+int brightness = high_intensity;
 long last_button;
-*/
+int x;
 
 // The shield uses the I2C SCL and SDA pins. On classic Arduinos
 // this is Analog 4 and 5 so you can't use those for analogRead() anymore
@@ -215,9 +217,11 @@ void setup() {
 // ***********************************************************************************************************
 void loop()
 {
-	// read the analog in value: and display on sample LED
+	// read the analog in value: and adjust brightness
 	sensorValue = analogRead(analogInPin);
-	hue = map(sensorValue, 0, 1023, 0, 255);
+	brightness = map(sensorValue, 0, 1023, 0, 255);
+ if (high_intensity != brightness)
+ {high_intensity == brightness;}
 	// Use FastLED automatic HSV->RGB conversion
 	showAnalogRGB( CHSV( hue, 255, high_intensity) );
 
@@ -385,113 +389,21 @@ void kelley_pattern() {
 	if (current_millis-last_millis > frame_delay) {
 		delay(0);
 		last_millis=current_millis;
-
-		if (frame_count == 0 ) {
-			x=xstart;
-			y=ystart;
-			frame_count++;
-			return;
-		}
-		if (frame_count == 1 ) {
-			kelley_frame();
-			return;
-
-		}
-
-		if (frame_count == 2){
-			kelley_frame();
-			return;
-		}
-
-		if (frame_count == 3) {
-			kelley_frame();
-			return;
-		}
-
-		if (frame_count == 4) {
-			kelley_frame();
-			return;
-		}
-
-		if (frame_count == 5) {
-			kelley_frame();
-			return;
-		}
-
-		if (frame_count == 6) {
-			kelley_frame();
-			return;
-		}
-
-		if (frame_count == 7) {
-			kelley_frame();
-			return;
-		}
-
-		if (frame_count == 8) {
-			kelley_frame();
-			return;
-		}
-
-		if (frame_count == 9) {
-			x=xstart;
-			y=ystart;
-			kelley_blank();
-			return;
-		}
-
-		if (frame_count == 10){
-			kelley_blank();
-			return;
-		}
-		if (frame_count == 11){
-			kelley_blank();
-			return;
-		}
-		if (frame_count == 12){
-			kelley_blank();
-			return;
-		}
-		if (frame_count == 13){
-			kelley_blank();
-			return;
-		}
-		if (frame_count == 14){
-			kelley_blank();
-			frame_count = 0;
-			return;
-		}
-
+/* run Kelley Pattern */
+kelley_frame();
 
 	}
 }
 void kelley_frame() {
 	// generates frames for kelley_pattern
-	if (frame_count <= (NUM_LEDS/2)){
-		leds[(x+NUM_LEDS) % NUM_LEDS]=CHSV(led_color[0],led_color[1],low_intensity);
-		leds[y] = leds[(x+NUM_LEDS) % NUM_LEDS];
-	}
-	if (frame_count >1 && frame_count <= (NUM_LEDS/2)+1) {
-		leds[(1+x+NUM_LEDS) % NUM_LEDS]=CHSV(led_color[0],led_color[1],med_intensity);
-		leds[y-1] = leds[(1+x+NUM_LEDS) % NUM_LEDS];
-	}
-	if (frame_count >2 && frame_count <= (NUM_LEDS/2)+2) {
-		leds[(2+x+NUM_LEDS) % NUM_LEDS]=CHSV(led_color[0],led_color[1],high_intensity);
-		leds[y-2] = leds[(2+x+NUM_LEDS) % NUM_LEDS];
-	}
-	FastLED.show();
-	x--;
-	y++;
-	frame_count++;
+
+//	FastLED.show();
 }
 void kelley_blank () {
 	// blanking subroutine for kelley_pattern
-	leds[(x+NUM_LEDS) % NUM_LEDS]=CHSV(led_color[0],led_color[1],0);
-	leds[y] = leds[(x+NUM_LEDS) % NUM_LEDS];
-	FastLED.show();
-	x--;
-	y++;
-	frame_count++;
+//	leds[(x+NUM_LEDS) % NUM_LEDS]=CHSV(led_color[0],led_color[1],0);
+//	leds[y] = leds[(x+NUM_LEDS) % NUM_LEDS];
+//	FastLED.show();
 }
 void colorBars()
 {
