@@ -169,7 +169,7 @@ void setup() {
 	// Print a message to the LCD. We track how long it takes since
 	// this library has been optimized a bit and we're proud of it :)
 	//	int time = millis();
-	lcd.print(F("Booting"));
+	lcd.print("Booting");
 	//	time = millis() - time;
 	//	Serial.print(F("Took "));
 	//	Serial.print(time);
