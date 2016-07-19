@@ -27,15 +27,15 @@
     <BootSegment>0</BootSegment>
     <AsfFrameworkConfig>
       <framework-data>
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.22.0" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.22.0" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
     <preserveEEPROM>true</preserveEEPROM>
   </PropertyGroup>
@@ -77,7 +77,6 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
       <Value></Value>
       <Value>../../../Berkana_V3</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
@@ -117,7 +116,6 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
       <Value></Value>
       <Value>../../../Berkana_V3</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
@@ -133,8 +131,8 @@
     </ToolchainSettings>
     <VMSETTING_IncludePaths>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility;D:/Users/Richard/My Documents/Arduino/libraries/FastLED;D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/Users/Richard/My Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../../Berkana_V3;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
-      <VisualMicroSettings xmlns="">
-        <arduino.upload.port>COM4</arduino.upload.port>
+      <VisualMicroSettings>
+        <arduino.upload.port>COM6</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
@@ -176,7 +174,6 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
       <Value></Value>
       <Value>../../../Berkana_V3</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
@@ -216,7 +213,6 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
       <Value></Value>
       <Value>../../../Berkana_V3</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
@@ -232,13 +228,19 @@
     </ToolchainSettings>
     <VMSETTING_IncludePaths>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility;D:/Users/Richard/My Documents/Arduino/libraries/FastLED;D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/Users/Richard/My Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../../Berkana_V3;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
-      <VisualMicroSettings xmlns="">
-        <arduino.upload.port>COM4</arduino.upload.port>
+      <VisualMicroSettings>
+        <arduino.upload.port>COM6</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Berkana_V3.ino">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="kelley_pattern.ino">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="subroutines.ino">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>

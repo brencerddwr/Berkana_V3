@@ -61,6 +61,7 @@
 #include <Adafruit_MCP23017.h>
 #include <Adafruit_RGBLCDShield.h>
 
+
 // Variable definitions start here
 
 // How many leds are in the strip?
@@ -121,12 +122,18 @@ PROGMEM unsigned int colors[][2] = {
 // main menu
 
 //char* main_menu[] = {"Kelley Yellow","Kelley Red","Kelley Blue","Kelley Green","Kelley Purple","Kelley White","Kelley dial","Rainbow chase", "Rainbow cycle", "Frame Delay", "Brightness"};
-//int menu_count = 11;
+//int main_menu_count = 11;
 char* main_menu[] = {"Pattern","Color","Speed"};
-int menu_count = 3;
+int main_menu_count = 3;
+
+// pattern menu
+char* pattern_menu[] = {"Kelley Yellow","Kelley Red","Kelley Blue","Kelley Green","Kelley Purple","Kelley White","Kelley custom","Rainbow chase", "Rainbow cycle"};
+int pattern_menu_count = 9;
+
+// end of menus
 
 const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
-int sensorValue = 0;        // value read from the pot
+int sensorValue = 128;        // value read from the pot
 
 //initialize variables
 
@@ -135,15 +142,18 @@ int c = 0;
 long last_millis;
 long current_millis;
 int frame_count;
-static uint8_t hue;
+uint8_t hue;
+uint8_t saturation = 255;
 bool kpattern_selected = true;
 bool chase_selected = false;
 bool cycle_selected = false;
 bool idle = true;
 int kelley_menu_selection = 0;
 int menu_active=0;
-int menu_current = menu_active;
-int menu_previous = menu_current;
+int main_menu_current = menu_active;
+int menu_previous = main_menu_current;
+int pattern_menu_active=0;
+int pattern_mene_current = pattern_menu_active;
 int brightness = high_intensity;
 long last_button;
 int x;
@@ -174,7 +184,7 @@ void setup() {
 	//	Serial.print(F("Took "));
 	//	Serial.print(time);
 	//	Serial.println(F(" ms"));
-	lcd.setBacklight(WHITE);
+	lcd.setBacklight(RED);
 
 	// sanity check delay - allows reprogramming if accidently blowing power w/leds
 	delay(3000);
@@ -220,10 +230,10 @@ void loop()
 	// read the analog in value: and adjust brightness
 	sensorValue = analogRead(analogInPin);
 	brightness = map(sensorValue, 0, 1023, 0, 255);
- if (high_intensity != brightness)
- {high_intensity == brightness;}
+  if (high_intensity != brightness)
+ {high_intensity = brightness;}
 	// Use FastLED automatic HSV->RGB conversion
-	showAnalogRGB( CHSV( hue, 255, high_intensity) );
+	showAnalogRGB( CHSV( hue, saturation, high_intensity) );
 
 	// set the cursor to column 0, line 1
 	// (note: line 1 is the second row, since counting begins with 0):
@@ -231,7 +241,7 @@ void loop()
 	// print the number of seconds since reset:
 	//lcd.print("Active: ");
 	lcd.print(main_menu[menu_active]);
-	//	  menu_previous = menu_current;
+	//	  menu_previous = main_menu_current;
 	if ((millis()-last_button) > 10000 && menu_active <9){
 		if (idle == false){
 			lcd.setCursor(0,0);
@@ -247,32 +257,32 @@ void loop()
 			lcd.clear();
 			lcd.setCursor(0,0);
 			if (buttons & BUTTON_UP) {
-				if (menu_current == 0){
-					menu_current = menu_count-1;
+				if (main_menu_current == 0){
+					main_menu_current = main_menu_count-1;
 				}
 				else {
-					menu_current = menu_current--;
+					main_menu_current = main_menu_current-1;
 				}
 				last_button=millis();
 				idle = false;
 				//lcd.print("Menu: ");
-				lcd.print(main_menu[menu_current]);
+				lcd.print(main_menu[main_menu_current]);
 				//			lcd.setBacklight(GREEN);
 				//lcd.print("up");
 			}
 			if (buttons & BUTTON_DOWN) {
-				if (menu_current == menu_count-1) {
-					menu_current = 0;
+				if (main_menu_current == main_menu_count-1) {
+					main_menu_current = 0;
 				}
 				else {
-					menu_current=menu_current++;
+					main_menu_current=main_menu_current+1;
 				}
 				last_button=millis();
 				idle = false;
 				//lcd.print("Menu: ");
-				lcd.print(main_menu[menu_current]);
+				lcd.print(main_menu[main_menu_current]);
 			}
-			if (menu_active==9){
+			if (menu_active==2){
 				//lcd.clear();
 				lcd.setCursor(0,0);
 				//lcd.print(frame_delay);
@@ -281,16 +291,18 @@ void loop()
 					if (frame_delay > 50) {
 						frame_delay=(frame_delay - 50);
 						lcd.print(frame_delay);
+						last_button=millis();
 					}
 				}
 				if (buttons & BUTTON_RIGHT) {
 					//lcd.clear();
 					//lcd.setCursor(0,0);
-					//lcd.print(main_menu[menu_current]);
+					//lcd.print(main_menu[main_menu_current]);
 					//lcd.setCursor(0,1);
 					if (frame_delay < 5000) {
 						frame_delay= (frame_delay + 50);
 						lcd.print(frame_delay);
+						last_button=millis();
 					}
 				}
 				if (buttons & BUTTON_SELECT) {
@@ -300,20 +312,29 @@ void loop()
 					lcd.print("Berkana");
 				}
 			}
-			if (menu_active==10){
+			if (menu_active==1){
 				lcd.setCursor(0,0);
 				if (buttons & BUTTON_LEFT) {
-					if (high_intensity > 72) {
-						high_intensity=(high_intensity - 4);
-						lcd.print(high_intensity);
-					}
+					hue=(hue - 1);
+						lcd.print(hue);
+						last_button=millis();
 				}
 				if (buttons & BUTTON_RIGHT) {
-					if (high_intensity < 252) {
-						high_intensity= (high_intensity + 4);
-						lcd.print(high_intensity);
-					}
+					hue = (hue + 1);
+						lcd.print(hue);
+						last_button=millis();
 				}
+				if (buttons & BUTTON_UP)
+				{	saturation = (saturation+1) ;
+					lcd.print(saturation);
+					last_button=millis();
+				}
+				if (buttons & BUTTON_DOWN)
+				{	saturation =(saturation -1);
+					lcd.print(saturation);
+					last_button=millis();
+				}
+				
 				if (buttons & BUTTON_SELECT) {
 					menu_active=menu_previous;
 					lcd.clear();
@@ -323,19 +344,19 @@ void loop()
 			}
 			if (buttons & BUTTON_SELECT) {
 				menu_previous=menu_active;
-				menu_active=menu_current;
+				menu_active=main_menu_current;
 				lcd.clear();
 				lcd.setCursor(0,0);
 				lcd.print("Berkana");
 				//lcd.setCursor(0,0);
 				//lcd.print("Menu: ");
-				//lcd.print(main_menu[menu_current]);
+				//lcd.print(main_menu[main_menu_current]);
 				
 			}
 		}
 	}
 	
-	choice_update();
+	pattern_choice_update();
 
 	current_millis=millis();
 	if (kpattern_selected)
@@ -384,26 +405,26 @@ void kelley_pattern() {
 	if (kelley_menu_selection == 6){
 		// set color to analog picker color
 		led_color[0]= hue;
-		led_color[1]= 255;
+		led_color[1]= saturation;
 	};
 	if (current_millis-last_millis > frame_delay) {
 		delay(0);
 		last_millis=current_millis;
-/* run Kelley Pattern */
-kelley_frame();
+		/* run Kelley Pattern */
+		kelley_frame();
 
 	}
 }
 void kelley_frame() {
 	// generates frames for kelley_pattern
 
-//	FastLED.show();
+	//	FastLED.show();
 }
 void kelley_blank () {
 	// blanking subroutine for kelley_pattern
-//	leds[(x+NUM_LEDS) % NUM_LEDS]=CHSV(led_color[0],led_color[1],0);
-//	leds[y] = leds[(x+NUM_LEDS) % NUM_LEDS];
-//	FastLED.show();
+	//	leds[(x+NUM_LEDS) % NUM_LEDS]=CHSV(led_color[0],led_color[1],0);
+	//	leds[y] = leds[(x+NUM_LEDS) % NUM_LEDS];
+	//	FastLED.show();
 }
 void colorBars()
 {
@@ -447,13 +468,13 @@ void cycle_sub() {
 		// delay (frame_delay);
 	}
 }
-void choice_update()
+void pattern_choice_update()
 {
 	if (menu_active < 7) {
 		kpattern_selected = true;
 		chase_selected = false;
 		cycle_selected = false;
-		kelley_menu_selection = menu_active;
+		kelley_menu_selection = pattern_menu_active;
 		// Serial.println(kelley_menu_selection);
 		
 	}
@@ -468,4 +489,5 @@ void choice_update()
 		cycle_selected = true;
 	}
 }
+
 

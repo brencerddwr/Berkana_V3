@@ -50,5 +50,4 @@ C:\Users\Richard\AppData\Local\Temp\VMicroBuilds\Berkana_V3\uno\Berkana_V3.cpp.o
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
  D:\Users\Richard\My\ Documents\Arduino\libraries\Adafruit_RGBLCDShield/Adafruit_MCP23017.h \
  D:\Users\Richard\My\ Documents\Arduino\libraries\Adafruit_RGBLCDShield/Adafruit_RGBLCDShield.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Print.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Extensions\k5yxuats.qfg\Micro\ Platforms\default\debuggers/VM_DBG/VM_DBG.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Print.h

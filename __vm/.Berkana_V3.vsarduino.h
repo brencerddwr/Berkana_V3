@@ -28,8 +28,9 @@ void kelley_blank ();
 void colorBars();
 void chase_sub();
 void cycle_sub();
-void choice_update();
+void pattern_choice_update();
 
 #include "pins_arduino.h" 
 #include "arduino.h"
 #include "Berkana_V3.ino"
+#include "kelley_pattern.ino"
