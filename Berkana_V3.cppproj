@@ -28,15 +28,15 @@
     <BootSegment>0</BootSegment>
     <AsfFrameworkConfig>
       <framework-data>
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.22.0" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.22.0" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
     <preserveEEPROM>true</preserveEEPROM>
   </PropertyGroup>
@@ -54,7 +54,6 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
-      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=10609</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
@@ -69,15 +68,16 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
-      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value></Value>
       <Value>../../../Berkana_V3</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG</Value>
       <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
@@ -95,7 +95,6 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
-      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=10609</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
@@ -110,15 +109,16 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
-      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value></Value>
       <Value>../../../Berkana_V3</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG</Value>
       <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
@@ -133,7 +133,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility;D:/Users/Richard/My Documents/Arduino/libraries/FastLED;D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/Users/Richard/My Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../../Berkana_V3;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility;D:/Users/Richard/My Documents/Arduino/libraries/FastLED;D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/Users/Richard/My Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../../Berkana_V3;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library/utility;</VMSETTING_IncludePaths>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -149,7 +149,6 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
-      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=10609</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
@@ -164,15 +163,16 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
-      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value></Value>
       <Value>../../../Berkana_V3</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG</Value>
       <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
@@ -190,7 +190,6 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
-      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=10609</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
@@ -205,15 +204,16 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
-      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value></Value>
       <Value>../../../Berkana_V3</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG</Value>
       <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
@@ -228,7 +228,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility;D:/Users/Richard/My Documents/Arduino/libraries/FastLED;D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/Users/Richard/My Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../../Berkana_V3;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGBLCDShield/utility;D:/Users/Richard/My Documents/Arduino/libraries/FastLED;D:/Users/Richard/My Documents/Arduino/libraries/FastLED/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/Users/Richard/My Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../../Berkana_V3;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/k5yxuats.qfg/Micro Platforms/default/debuggers;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library;D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library/utility;</VMSETTING_IncludePaths>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Berkana_V3.ino">

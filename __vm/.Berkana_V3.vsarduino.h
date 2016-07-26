@@ -10,7 +10,6 @@
 
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define _VMDEBUG 1
 #define ARDUINO 10609
 #define ARDUINO_MAIN
 #define F_CPU 16000000L
@@ -19,7 +18,6 @@
 #define ARDUINO 10609
 #define ARDUINO_AVR_UNO
 #define ARDUINO_ARCH_AVR
- #include <VM_DBG/VM_DBG.h>
 
 //
 //
@@ -30,7 +28,9 @@ void kelley_blank ();
 void colorBars();
 void chase_sub();
 void cycle_sub();
-void pattern_choice_update();
+void kelley_pattern_new();
+void drawFractionalBar( int pos16, int width, uint8_t hue);
+void build_logical_arrays(int _startPosition);
 
 #include "pins_arduino.h" 
 #include "arduino.h"
