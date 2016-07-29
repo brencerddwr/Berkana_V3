@@ -139,8 +139,10 @@ byte c = 0;
 unsigned long last_millis;
 unsigned long current_millis;
 int frame_count;
-byte hue;
+byte hue = 64;
 byte saturation = 255;
+byte stripHue = 64;
+byte stripSaturation = 255;
 bool kpattern_selected = true;
 bool chase_selected = false;
 bool cycle_selected = false;
@@ -153,11 +155,11 @@ byte brightness = high_intensity;
 unsigned long last_button;
 int x;
 
-// Kelley Pattern variables 
+// Kelley Pattern variables
 int F16pos = 0;
-byte F16delta = 1;
+byte F16delta = 2;
 byte Width = 3; // width of line
-unsigned int InterframeDelay = 30; //ms
+unsigned int InterframeDelay = 5; //ms
 
 // logical order arrays
 
@@ -200,6 +202,7 @@ void setup() {
 	// turn off all leds
 	FastLED.clear();
 	FastLED.show();
+	FastLED.setBrightness(32);
 	delay (200);
 
 	pinMode(REDPIN,   OUTPUT);
@@ -233,11 +236,12 @@ void loop()
 {
 	// read the analog in value: and adjust brightness
 	sensorValue = analogRead(analogInPin);
-	brightness = map(sensorValue, 0, 1023, 0, 255);
+	brightness = constrain(map(sensorValue, 0, 1023, 0, 255),64,255);
 	if (high_intensity != brightness)
 	{high_intensity = brightness;}
 	// Use FastLED automatic HSV->RGB conversion
 	showAnalogRGB( CHSV( hue, saturation, high_intensity) );
+	FastLED.setBrightness(brightness);
 
 	// set the cursor to column 0, line 1
 	// (note: line 1 is the second row, since counting begins with 0):
@@ -253,124 +257,193 @@ void loop()
 		lcd.setCursor(0,0);
 		lcd.print("Berkana");
 	}
-	uint8_t buttons = lcd.readButtons();
-	if ((millis()-last_button) > 333) {
-		if (buttons) {
-			lcd.clear();
-			lcd.setCursor(0,0);
-			if (buttons & BUTTON_UP) {
-				if (main_menu_current == 0){
-					main_menu_current = main_menu_count-1;
-				}
-				else {
-					main_menu_current = main_menu_current-1;
-				}
-				last_button=millis();
-				idle = false;
-				//lcd.print("Menu: ");
-				lcd.print(main_menu[main_menu_current]);
-				//			lcd.setBacklight(GREEN);
-				//lcd.print("up");
-			}
-			if (buttons & BUTTON_DOWN) {
-				if (main_menu_current == main_menu_count-1) {
-					main_menu_current = 0;
-				}
-				else {
-					main_menu_current=main_menu_current+1;
-				}
-				last_button=millis();
-				idle = false;
-				//lcd.print("Menu: ");
-				lcd.print(main_menu[main_menu_current]);
-			}
-			/* if (menu_active==2){
-			//lcd.clear();
-			lcd.setCursor(0,0);
-			//lcd.print(frame_delay);
-			if (buttons & BUTTON_LEFT) {
-			//lcd.setCursor(0,1);
-			if (frame_delay > 50) {
-			frame_delay=(frame_delay - 50);
-			lcd.print(frame_delay);
-			last_button=millis();
-			}
-			}
-			if (buttons & BUTTON_RIGHT) {
-			//lcd.clear();
-			//lcd.setCursor(0,0);
-			//lcd.print(main_menu[main_menu_current]);
-			//lcd.setCursor(0,1);
-			if (frame_delay < 5000) {
-			frame_delay= (frame_delay + 50);
-			lcd.print(frame_delay);
-			last_button=millis();
-			}
-			}
-			if (buttons & BUTTON_SELECT) {
-			menu_active=menu_previous;
-			lcd.clear();
-			lcd.setCursor(0,0);
-			lcd.print("Berkana");
-			}
-			}*/
-			/* if (menu_active==1){
-			lcd.setCursor(0,0);
-			if (buttons & BUTTON_LEFT) {
-			hue=(hue - 1);
-			lcd.print(hue);
-			last_button=millis();
-			}
-			if (buttons & BUTTON_RIGHT) {
-			hue = (hue + 1);
-			lcd.print(hue);
-			last_button=millis();
-			}
-			if (buttons & BUTTON_UP)
-			{	saturation = (saturation+1) ;
-			lcd.print(saturation);
-			last_button=millis();
-			}
-			if (buttons & BUTTON_DOWN)
-			{	saturation =(saturation -1);
-			lcd.print(saturation);
-			last_button=millis();
-			}
-			
-			if (buttons & BUTTON_SELECT) {
-			menu_active=menu_previous;
-			lcd.clear();
-			lcd.setCursor(0,0);
-			lcd.print("Berkana");
-			}
-			} */
-			/*			if (buttons & BUTTON_SELECT) {
-			menu_previous=main_menu_active;
-			main_menu_active=main_menu_current;
-			lcd.clear();
-			lcd.setCursor(0,0);
-			lcd.print("Berkana");
-			//lcd.setCursor(0,0);
-			//lcd.print("Menu: ");
-			//lcd.print(main_menu[main_menu_current]);
-			
-			} */
-		}
+	
+	switch (main_menu_current)
+	{
+		case 0: // kelley pattern red
+		led_color[0] = pgm_read_dword_near(&colors[main_menu_active][0]);
+		led_color[1] = pgm_read_dword_near(&colors[main_menu_active][1]);
+		stripHue = led_color[0];
+		stripSaturation = led_color[1];
+		lcd.setBacklight(YELLOW);
+		kelley_pattern_new();
+		break;
+		
+		case 1:
+		led_color[0] = pgm_read_dword_near(&colors[main_menu_active][0]);
+		led_color[1] = pgm_read_dword_near(&colors[main_menu_active][1]);
+		stripHue = led_color[0];
+		stripSaturation = led_color[1];
+		lcd.setBacklight(RED);
+		kelley_pattern_new();
+		break;
+		
+		case 2:
+		led_color[0] = pgm_read_dword_near(&colors[main_menu_active][0]);
+		led_color[1] = pgm_read_dword_near(&colors[main_menu_active][1]);
+		stripHue = led_color[0];
+		stripSaturation = led_color[1];
+		lcd.setBacklight(BLUE);
+		kelley_pattern_new();
+		break;
+		
+		case 3:
+		led_color[0] = pgm_read_dword_near(&colors[main_menu_active][0]);
+		led_color[1] = pgm_read_dword_near(&colors[main_menu_active][1]);
+		stripHue = led_color[0];
+		stripSaturation = led_color[1];
+		lcd.setBacklight(GREEN);
+		kelley_pattern_new();
+		break;
+		
+		case 4:
+		led_color[0] = pgm_read_dword_near(&colors[main_menu_active][0]);
+		led_color[1] = pgm_read_dword_near(&colors[main_menu_active][1]);
+		stripHue = led_color[0];
+		stripSaturation = led_color[1];
+		lcd.setBacklight(VIOLET);
+		kelley_pattern_new();
+		break;
+		
+		case 5:
+		led_color[0] = pgm_read_dword_near(&colors[main_menu_active][0]);
+		led_color[1] = pgm_read_dword_near(&colors[main_menu_active][1]);
+		stripHue = led_color[0];
+		stripSaturation = led_color[1];
+		lcd.setBacklight(WHITE);
+		kelley_pattern_new();
+		break;
+		
+		case 6: // kelley variable color
+		break;
+		
+		case 7:  // rainbow chase
+		chase_sub();
+		break;
+		
+		case 8:
+		cycle_sub(); //rainbow cycle
+		break;
+		
 	}
+	/*	uint8_t buttons = lcd.readButtons();
+	if ((millis()-last_button) > 333) {
+	if (buttons) {
+	lcd.clear();
+	lcd.setCursor(0,0);
+	if (buttons & BUTTON_UP) {
+	if (main_menu_current == 0){
+	main_menu_current = main_menu_count-1;
+	}
+	else {
+	main_menu_current = main_menu_current-1;
+	}
+	last_button=millis();
+	idle = false;
+	//lcd.print("Menu: ");
+	lcd.print(main_menu[main_menu_current]);
+	//			lcd.setBacklight(GREEN);
+	//lcd.print("up");
+	}
+	if (buttons & BUTTON_DOWN) {
+	if (main_menu_current == main_menu_count-1) {
+	main_menu_current = 0;
+	}
+	else {
+	main_menu_current=main_menu_current+1;
+	}
+	last_button=millis();
+	idle = false;
+	//lcd.print("Menu: ");
+	lcd.print(main_menu[main_menu_current]);
+	}
+	 if (menu_active==2){
+	//lcd.clear();
+	lcd.setCursor(0,0);
+	//lcd.print(frame_delay);
+	if (buttons & BUTTON_LEFT) {
+	//lcd.setCursor(0,1);
+	if (frame_delay > 50) {
+	frame_delay=(frame_delay - 50);
+	lcd.print(frame_delay);
+	last_button=millis();
+	}
+	}
+	if (buttons & BUTTON_RIGHT) {
+	//lcd.clear();
+	//lcd.setCursor(0,0);
+	//lcd.print(main_menu[main_menu_current]);
+	//lcd.setCursor(0,1);
+	if (frame_delay < 5000) {
+	frame_delay= (frame_delay + 50);
+	lcd.print(frame_delay);
+	last_button=millis();
+	}
+	}
+	if (buttons & BUTTON_SELECT) {
+	menu_active=menu_previous;
+	lcd.clear();
+	lcd.setCursor(0,0);
+	lcd.print("Berkana");
+	}
+	}
+	 if (menu_active==1){
+	lcd.setCursor(0,0);
+	if (buttons & BUTTON_LEFT) {
+	hue=(hue - 1);
+	lcd.print(hue);
+	last_button=millis();
+	}
+	if (buttons & BUTTON_RIGHT) {
+	hue = (hue + 1);
+	lcd.print(hue);
+	last_button=millis();
+	}
+	if (buttons & BUTTON_UP)
+	{	saturation = (saturation+1) ;
+	lcd.print(saturation);
+	last_button=millis();
+	}
+	if (buttons & BUTTON_DOWN)
+	{	saturation =(saturation -1);
+	lcd.print(saturation);
+	last_button=millis();
+	}
+	
+	if (buttons & BUTTON_SELECT) {
+	menu_active=menu_previous;
+	lcd.clear();
+	lcd.setCursor(0,0);
+	lcd.print("Berkana");
+	}
+	} 
+	if (buttons & BUTTON_SELECT) {
+	menu_previous=main_menu_active;
+	main_menu_active=main_menu_current;
+	lcd.clear();
+	lcd.setCursor(0,0);
+	lcd.print("Berkana");
+	//lcd.setCursor(0,0);
+	//lcd.print("Menu: ");
+	//lcd.print(main_menu[main_menu_current]);
+	
+	} 
+	}
+	} */
 	
 
 	current_millis=millis();
-	if (kpattern_selected)
-	{ kelley_pattern();
-	};
-	if (chase_selected)
-	{
-		chase_sub();
-	};
-	if (cycle_selected)
-	{
-		cycle_sub();
-	};
+//	if (kpattern_selected)
+//	{ kelley_pattern();
+//	};
+//	if (chase_selected)
+//	{
+//		chase_sub();
+//	};
+//	if (cycle_selected)
+//	{
+//		cycle_sub();
+//	};
 
 
 }
@@ -399,23 +472,23 @@ void showAnalogRGB( const CRGB& rgb)
 
 void kelley_pattern() {
 	// subroutine to display kelley pattern in selected color
-	if (main_menu_active < 6) {
-		led_color[0] = pgm_read_dword_near(&colors[main_menu_active][0]);
-		led_color[1] = pgm_read_dword_near(&colors[main_menu_active][1]);
-	};
+//	if (main_menu_active < 6) {
+//		led_color[0] = pgm_read_dword_near(&colors[main_menu_active][0]);
+//		led_color[1] = pgm_read_dword_near(&colors[main_menu_active][1]);
+//	};
 
-	if (main_menu_active == 6){
+//	if (main_menu_active == 6){
 		// set color to analog picker color
-		led_color[0]= hue;
-		led_color[1]= saturation;
-	};
-	if (current_millis-last_millis > frame_delay) {
-		delay(0);
-		last_millis=current_millis;
+//		led_color[0]= hue;
+//		led_color[1]= saturation;
+//	};
+//	if (current_millis-last_millis > frame_delay) {
+//		delay(0);
+//		last_millis=current_millis;
 		/* run Kelley Pattern */
-		kelley_frame();
+//		kelley_frame();
 
-	}
+//	}
 }
 
 void kelley_frame() {
@@ -476,31 +549,32 @@ void cycle_sub() {
 	}
 }
 void kelley_pattern_new(){
-		// Update the "Fraction Bar" by 1/16th pixel every time
-		F16pos += F16delta;
-		
-		// wrap around at end
-		// remember that F16pos contains position in "16ths of a pixel"
-		// so the 'end of the strip' is ((NUM_LEDS/2) * 16)
-		if( F16pos >= ((NUM_LEDS/2) * 16)) {
-			F16pos -= ((NUM_LEDS/2) * 16);
-		}
-		
-		
-		// Draw everything:
-		// clear the pixel buffer
-		memset8( leds, 0, NUM_LEDS * sizeof(CRGB));
-		
-		
-		// draw the Fractional Bar, length=4px
-		drawFractionalBar( F16pos, Width, hue / 256);
-		
-		FastLED.show();
-		#if defined(FASTLED_VERSION) && (FASTLED_VERSION >= 2001000)
-		FastLED.delay(InterframeDelay);
-		#else
-		delay(InterframeDelay);
-		#endif
+	// Update the "Fraction Bar" by 1/16th pixel every time
+	F16pos += F16delta;
+	
+	// wrap around at end
+	// remember that F16pos contains position in "16ths of a pixel"
+	// so the 'end of the strip' is ((NUM_LEDS/2) * 16)
+	if( F16pos >= ((NUM_LEDS/2) * 16)) {
+		F16pos -= ((NUM_LEDS/2) * 16);
+	}
+	
+	
+	// Draw everything:
+	// clear the pixel buffer
+//	memset8( leds, 0, NUM_LEDS * sizeof(CRGB));
+	FastLED.clear();
+	
+	
+	// draw the Fractional Bar, length=4px
+	drawFractionalBar( F16pos, Width, hue / 256);
+	
+	FastLED.show();
+	#if defined(FASTLED_VERSION) && (FASTLED_VERSION >= 2001000)
+	FastLED.delay(InterframeDelay);
+	#else
+	delay(InterframeDelay);
+	#endif
 }
 void drawFractionalBar( int pos16, int width, uint8_t hue)
 {
@@ -544,8 +618,8 @@ void drawFractionalBar( int pos16, int width, uint8_t hue)
 			bright = 255;
 		}
 		
-		leds[logical_array_one[i]] += CHSV( hue, 255, bright);
-		leds[logical_array_two[i]] += CHSV( hue, 255, bright);
+		leds[logical_array_one[i]] += CHSV( stripHue, stripSaturation, bright);
+		leds[logical_array_two[i]] += CHSV( stripHue, stripSaturation, bright);
 		//    leds[i] += CHSV( hue, 255, bright);
 		i++;
 		if( i == NUM_LEDS/2) i = 0; // wrap around
@@ -556,7 +630,7 @@ void build_logical_arrays(int _startPosition){
 	// build logical arrays
 	int logical_array_one_position = _startPosition;
 	int logical_array_two_position = _startPosition-1;
-	for (int a = 0;a <= (NUM_LEDS/2); a++){
+	for (int a = 0;a <= ((NUM_LEDS/2)-1); a++){
 		if (logical_array_one_position > NUM_LEDS-1)
 		{logical_array_one_position=logical_array_one_position-NUM_LEDS;
 		}
@@ -568,7 +642,5 @@ void build_logical_arrays(int _startPosition){
 		logical_array_one_position++;
 		logical_array_two_position--;
 	}
-	logical_array_one[0]=_startPosition; //without this line, position 0 in array 1 does not display anything.
-	//there is some sort of a problem in the for loop above that must be writing bad data to logical_array_one[0].
 
 }
