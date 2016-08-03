@@ -34,7 +34,7 @@
         <documentation help="" />
         <offline-documentation help="" />
         <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.22.0" />
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.23.1" />
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
@@ -66,9 +66,9 @@
     <ListValues>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/cores/arduino</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/variants/standard</Value>
-      <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/libraries/Wire/src</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/libraries</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries</Value>
@@ -106,9 +106,9 @@
     <ListValues>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/cores/arduino</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/variants/standard</Value>
-      <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/libraries/Wire/src</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/libraries</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries</Value>
@@ -415,9 +415,9 @@ build.arch=AVR
     <ListValues>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/cores/arduino</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/variants/standard</Value>
-      <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/libraries/Wire/src</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/libraries</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries</Value>
@@ -455,9 +455,9 @@ build.arch=AVR
     <ListValues>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/cores/arduino</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/variants/standard</Value>
-      <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/libraries/Wire/src</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries/Adafruit_RGB_LCD_Shield_Library</Value>
+      <Value>D:/Users/Richard/My Documents/Arduino/libraries/FastLED</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/Richard/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.12/libraries</Value>
       <Value>D:/Users/Richard/My Documents/Arduino/libraries</Value>

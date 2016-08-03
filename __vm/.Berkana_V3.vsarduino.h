@@ -22,15 +22,15 @@
 //
 //
 void showAnalogRGB( const CRGB& rgb);
-void kelley_pattern();
-void kelley_frame();
-void kelley_blank ();
 void colorBars();
 void chase_sub();
 void cycle_sub();
 void kelley_pattern_new();
 void drawFractionalBar( int pos16, int width, uint8_t hue);
 void build_logical_arrays(int _startPosition);
+void menuButtonHandling();
+void customSaturationbuttons();
+void customHuebuttons();
 
 #include "pins_arduino.h" 
 #include "arduino.h"
