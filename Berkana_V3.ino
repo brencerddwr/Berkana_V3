@@ -120,7 +120,20 @@ PROGMEM byte colors[][2] = {
 // define menus
 
 // main menu
-const String main_menu[] = {"Kelley Yellow","Kelley Red","Kelley Blue","Kelley Green","Kelley Purple","Kelley White","Kelley custom","Rainbow chase", "Rainbow cycle", "Custom Saturation","Custom Hue"};
+const String main_menu[] =
+{
+	"Kelley Yellow",
+	"Kelley Red",
+	"Kelley Blue",
+	"Kelley Green",
+	"Kelley Purple",
+	"Kelley White",
+	"Kelley custom",
+	"Rainbow chase",
+	"Rainbow cycle",
+	"Custom Saturation",
+	"Custom Hue"
+};
 byte main_menu_count = 11;
 byte main_menu_active = 0;
 
@@ -178,8 +191,6 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 // ***********************************************************************************************************
 void setup() {
 
-	//	Serial.begin(115200);
-
 	// set up the LCD's number of columns and rows:
 	lcd.begin(16, 2);
 	lcd.setBacklight(RED);
@@ -229,16 +240,18 @@ void loop()
 {
 	// read the analog in value: and adjust brightness
 	sensorValue = analogRead(analogInPin);
-	brightness = constrain(map(sensorValue, 0, 1023, 0, 255),64,255);
+	brightness = constrain(map(sensorValue, 0, 1023, 0, 255),32,255);
 	if (high_intensity != brightness)
-	{high_intensity = brightness;}
-	// Use FastLED automatic HSV->RGB conversion
+	{
+		high_intensity = brightness;
+	}
+
 	if (main_menu_current == 9 || main_menu_current == 10)
 	{
 		showAnalogRGB( CHSV( customHue, customSaturation, high_intensity) );
-		leds[0]=CHSV(customHue,customSaturation,high_intensity);
-		FastLED.show ();
-	} 
+		//		leds[0]=CHSV(customHue,customSaturation,high_intensity);
+		//		FastLED.show ();
+	}
 	else
 	{
 		showAnalogRGB( CHSV( stripHue, stripSaturation, high_intensity) );
@@ -250,8 +263,10 @@ void loop()
 	lcd.setCursor(0, 1);
 	lcd.print(main_menu[main_menu_current]);
 	//	  menu_previous = main_menu_current;
-	if ((millis()-last_button) > 10000){
-		if (idle == false){
+	if ((millis()-last_button) > 10000)
+	{
+		if (idle == false)
+		{
 			lcd.setCursor(0,0);
 			lcd.print("                ");
 			idle = true;
@@ -325,21 +340,25 @@ void loop()
 		case 6:		// kelley variable color
 		stripHue=customHue;
 		stripSaturation=customSaturation;
-		kelley_pattern_new ();		
+		lcd.setBacklight(TEAL);
+		kelley_pattern_new ();
 		menuButtonHandling();
 		break;
 		
 		case 7:		// rainbow chase
 		chase_sub();
+		lcd.setBacklight(TEAL);
 		menuButtonHandling();
 		break;
 		
 		case 8:		//raimbow cycle
 		cycle_sub();
+		lcd.setBacklight(TEAL);
 		menuButtonHandling();
 		break;
 		
 		case 9:		//custom saturation
+		lcd.setBacklight(WHITE);
 		lcd.setCursor (0,0);
 		lcd.print("                ");
 		lcd.setCursor (0,0);
@@ -348,6 +367,7 @@ void loop()
 		break;
 		
 		case 10:		//custom hue
+		lcd.setBacklight(WHITE);
 		lcd.setCursor (0,0);
 		lcd.print("                ");
 		lcd.setCursor (0,0);
@@ -355,8 +375,6 @@ void loop()
 		customHuebuttons ();
 		break;
 	}
-	
-
 	current_millis=millis();
 }
 
@@ -390,23 +408,24 @@ void colorBars()
 	showAnalogRGB( CRGB::Red );
 	fill_solid ( &(leds[0]), NUM_LEDS, CRGB::Red);
 	FastLED.show();
-	delay(500);
+	delay(300);
 	showAnalogRGB( CRGB::Green );
 	fill_solid ( &(leds[0]), NUM_LEDS, CRGB::Green);
 	FastLED.show();
-	delay(500);
+	delay(300);
 	showAnalogRGB( CRGB::Blue );
 	fill_solid ( &(leds[0]), NUM_LEDS, CRGB::Blue);
 	FastLED.show();
-	delay(500);
+	delay(300);
 	showAnalogRGB( CRGB::Black );
 	fill_solid ( &(leds[0]), NUM_LEDS, CRGB::Black);
 	FastLED.show();
-	delay(500);
 }
 
-void chase_sub() {
-	if (current_millis-last_millis > frame_delay * .15) {
+void chase_sub()
+{
+	if (current_millis-last_millis > frame_delay * .15)
+	{
 		delay(0);
 		last_millis=current_millis;
 		static uint8_t hue = 64;
@@ -418,8 +437,10 @@ void chase_sub() {
 	}
 }
 
-void cycle_sub() {
-	if (current_millis-last_millis > (frame_delay * .5)) {
+void cycle_sub()
+{
+	if (current_millis-last_millis > (frame_delay * .5))
+	{
 		delay(0);
 		last_millis=current_millis;
 
@@ -429,14 +450,16 @@ void cycle_sub() {
 		stripSaturation = 255;
 	}
 }
-void kelley_pattern_new(){
+void kelley_pattern_new()
+{
 	// Update the "Fraction Bar" by 1/16th pixel every time
 	F16pos += F16delta;
 	
 	// wrap around at end
 	// remember that F16pos contains position in "16ths of a pixel"
 	// so the 'end of the strip' is ((NUM_LEDS/2) * 16)
-	if( F16pos >= ((NUM_LEDS/2) * 16)) {
+	if( F16pos >= ((NUM_LEDS/2) * 16))
+	{
 		F16pos -= ((NUM_LEDS/2) * 16);
 	}
 	
@@ -451,7 +474,7 @@ void kelley_pattern_new(){
 	drawFractionalBar( F16pos, Width, hue / 256);
 	
 	FastLED.show();
-//	FastLED.delay(InterframeDelay);
+	//	FastLED.delay(InterframeDelay);
 }
 void drawFractionalBar( int pos16, int width, uint8_t hue)
 {
@@ -483,14 +506,18 @@ void drawFractionalBar( int pos16, int width, uint8_t hue)
 	// which is why the "<= width" below instead of "< width".
 	
 	uint8_t bright;
-	for( int n = 0; n <= width; n++) {
-		if( n == 0) {
+	for( int n = 0; n <= width; n++)
+	{
+		if( n == 0)
+		{
 			// first pixel in the bar
 			bright = firstpixelbrightness;
 			} else if( n == width ) {
 			// last pixel in the bar
 			bright = lastpixelbrightness;
-			} else {
+		}
+		else
+		{
 			// middle pixels
 			bright = 255;
 		}
@@ -499,20 +526,25 @@ void drawFractionalBar( int pos16, int width, uint8_t hue)
 		leds[logical_array_two[i]] += CHSV( stripHue, stripSaturation, bright);
 		//    leds[i] += CHSV( hue, 255, bright);
 		i++;
-		if( i == NUM_LEDS/2) i = 0; // wrap around
+		if( i == NUM_LEDS/2)
+		{
+			i = 0; // wrap around
+		}
 	}
 }
-
 void build_logical_arrays(int _startPosition){
 	// build logical arrays
 	int logical_array_one_position = _startPosition;
 	int logical_array_two_position = _startPosition-1;
-	for (int a = 0;a <= ((NUM_LEDS/2)-1); a++){
+	for (int a = 0;a <= ((NUM_LEDS/2)-1); a++)
+	{
 		if (logical_array_one_position > NUM_LEDS-1)
-		{logical_array_one_position=logical_array_one_position-NUM_LEDS;
+		{
+			logical_array_one_position=logical_array_one_position-NUM_LEDS;
 		}
 		if (logical_array_two_position < 0)
-		{logical_array_two_position=logical_array_two_position+NUM_LEDS;
+		{
+			logical_array_two_position=logical_array_two_position+NUM_LEDS;
 		}
 		logical_array_one[a]=logical_array_one_position;
 		logical_array_two[a]=logical_array_two_position;
@@ -521,12 +553,11 @@ void build_logical_arrays(int _startPosition){
 	}
 
 }
-
 void menuButtonHandling()
 {
 	if (millis ()-last_button > menuDelay)
-{
-	uint8_t buttons = lcd.readButtons();
+	{
+		uint8_t buttons = lcd.readButtons();
 		switch (buttons) {
 			
 			case (BUTTON_DOWN):
@@ -579,102 +610,102 @@ void menuButtonHandling()
 			default:
 			break;
 		}
-}
+	}
 }
 void customSaturationbuttons()
 {
 	if (millis ()-last_button > menuDelay/3)
 	{
-			uint8_t buttons = lcd.readButtons();
-			switch (buttons) {
-				
-				case (BUTTON_DOWN):
-				break;
-				
-				case (BUTTON_UP):
-				break;
-				
-				case (BUTTON_LEFT):
-				if (customSaturation == 0)
-				{
-					customSaturation = 255;
-				} 
-				else
-				{
-					customSaturation--;
-				}
-				idle = false;
-				last_button = millis ();
-				break;
-				
-				case (BUTTON_RIGHT):
-				if (customSaturation == 255)
-				{
-					customSaturation = 0;
-				} 
-				else
-				{
-					customSaturation++;
-				}
-				idle = false;
-				last_button = millis ();
-				break;
-				
-				case (BUTTON_SELECT):
-				main_menu_current = main_menu_previous;
-				lcd.clear ();
-				idle = false;
-				last_button = millis();
-				break;
+		uint8_t buttons = lcd.readButtons();
+		switch (buttons) {
+			
+			case (BUTTON_DOWN):
+			break;
+			
+			case (BUTTON_UP):
+			break;
+			
+			case (BUTTON_LEFT):
+			if (customSaturation == 0)
+			{
+				customSaturation = 255;
 			}
-}
+			else
+			{
+				customSaturation--;
+			}
+			idle = false;
+			last_button = millis ();
+			break;
+			
+			case (BUTTON_RIGHT):
+			if (customSaturation == 255)
+			{
+				customSaturation = 0;
+			}
+			else
+			{
+				customSaturation++;
+			}
+			idle = false;
+			last_button = millis ();
+			break;
+			
+			case (BUTTON_SELECT):
+			main_menu_current = main_menu_previous;
+			lcd.clear ();
+			idle = false;
+			last_button = millis();
+			break;
+		}
+	}
 }
 void customHuebuttons()
-{if (millis ()-last_button > menuDelay/3)
 {
-	
-				uint8_t buttons = lcd.readButtons();
-			switch (buttons) {
-				
-				case (BUTTON_DOWN):
-				break;
-				
-				case (BUTTON_UP):
-				break;
-				
-				case (BUTTON_LEFT):
-				if (customHue == 0)
-				{
-					customHue = 255;
-				} 
-				else
-				{
-					customHue--;
-				}
-				idle = false;
-				last_button = millis ();
-				break;
-				
-				case (BUTTON_RIGHT):
-				if (customHue == 255)
-				{
-					customHue = 0;
-				} 
-				else
-				{
-					customHue++;
-				}
-				idle = false;
-				last_button = millis ();
-				break;
-				
-				case (BUTTON_SELECT):
-				main_menu_current = main_menu_previous;
-				lcd.clear ();
-				idle = false;
-				last_button = millis();
-				break;
+	if (millis ()-last_button > menuDelay/3)
+	{
+		
+		uint8_t buttons = lcd.readButtons();
+		switch (buttons)
+		{
+			case (BUTTON_DOWN):
+			break;
+			
+			case (BUTTON_UP):
+			break;
+			
+			case (BUTTON_LEFT):
+			if (customHue == 0)
+			{
+				customHue = 255;
 			}
-}
-
+			else
+			{
+				customHue--;
+			}
+			idle = false;
+			last_button = millis ();
+			break;
+			
+			case (BUTTON_RIGHT):
+			if (customHue == 255)
+			{
+				customHue = 0;
+			}
+			else
+			{
+				customHue++;
+			}
+			idle = false;
+			last_button = millis ();
+			break;
+			
+			case (BUTTON_SELECT):
+			main_menu_current = main_menu_previous;
+			lcd.clear ();
+			idle = false;
+			last_button = millis();
+			break;
+		}
+	}
 }
