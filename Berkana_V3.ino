@@ -87,7 +87,7 @@
 #define WHITE 0x7
 
 // define the delay between frames in milliseconds.
-unsigned int frame_delay = 50;
+unsigned int frame_delay = 6;
 unsigned int menuDelay = 250;
 // define initial intensity levels
 byte high_intensity = 128;
@@ -160,6 +160,7 @@ byte main_menu_current = main_menu_active;
 byte main_menu_previous = main_menu_current;
 byte brightness = high_intensity;
 unsigned long last_button;
+unsigned long lastLoop;
 int x;
 
 // Kelley Pattern variables
@@ -227,6 +228,7 @@ void setup() {
 	led_color[1] = pgm_read_dword_near(&colors[c][1]);
 	last_button=millis();
 	last_millis=millis();
+	lastLoop = millis();
 
 }
 
@@ -238,9 +240,11 @@ void setup() {
 // ***********************************************************************************************************
 void loop()
 {
+	unsigned long loopSpeed=millis()-lastLoop;
+	lastLoop = millis();
 	// read the analog in value: and adjust brightness
 	sensorValue = analogRead(analogInPin);
-	brightness = constrain(map(sensorValue, 0, 1023, 0, 255),32,255);
+	brightness = constrain(map(sensorValue, 0, 1023, 90, 255),90,255);
 	if (high_intensity != brightness)
 	{
 		high_intensity = brightness;
@@ -263,16 +267,18 @@ void loop()
 	lcd.setCursor(0, 1);
 	lcd.print(main_menu[main_menu_current]);
 	//	  menu_previous = main_menu_current;
-	if ((millis()-last_button) > 10000)
+	if ((millis()-last_button) > 10000 && !idle)
 	{
-		if (idle == false)
-		{
+	//	if (idle == false)
+	//	{
 			lcd.setCursor(0,0);
 			lcd.print("                ");
+			lcd.setCursor(0,0);
+			lcd.print("Berkana");
 			idle = true;
-		}
-		lcd.setCursor(0,0);
-		lcd.print("Berkana");
+	//	}
+//		lcd.setCursor(0,0);
+//		lcd.print("Berkana");
 	}
 	
 	switch (main_menu_current)
@@ -424,7 +430,7 @@ void colorBars()
 
 void chase_sub()
 {
-	if (current_millis-last_millis > frame_delay * .15)
+	if (current_millis-last_millis > frame_delay)
 	{
 		delay(0);
 		last_millis=current_millis;
@@ -439,7 +445,7 @@ void chase_sub()
 
 void cycle_sub()
 {
-	if (current_millis-last_millis > (frame_delay * .5))
+	if (current_millis-last_millis > (frame_delay * 4 ))
 	{
 		delay(0);
 		last_millis=current_millis;
@@ -604,6 +610,8 @@ void menuButtonHandling()
 			main_menu_current = main_menu_active;
 			lcd.clear ();
 			idle = false;
+			FastLED.clear();
+			FastLED.show ();
 			last_button = millis();
 			break;
 			
