@@ -240,8 +240,8 @@ void setup() {
 // ***********************************************************************************************************
 void loop()
 {
-	unsigned long loopSpeed=millis()-lastLoop;
-	lastLoop = millis();
+	//unsigned long loopSpeed=millis()-lastLoop;
+	//lastLoop = millis();
 	// read the analog in value: and adjust brightness
 	sensorValue = analogRead(analogInPin);
 	brightness = constrain(map(sensorValue, 0, 1023, 90, 255),90,255);
