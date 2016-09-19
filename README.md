@@ -1,5 +1,6 @@
 # Berkana_V3
-Berkana light complete recode
-Complete ground up recoding of Berkana sign to allow easier coding of patterns and addition of features
+#### individually addressable LEDS in a specific shape to help people locate our home or campsite.
 
-plan conversion to HSV and redesign UI
+The current version uses the addressable LEDS strips from Radio Shack.  I was able to purchase 7 or 8 meters of them when they were closing stores along with a bunch of other stuff.
+
+Thks will be the prototype if friends want one for their own use.
