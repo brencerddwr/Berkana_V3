@@ -96,7 +96,7 @@ byte high_intensity = 128;
 CRGB leds[NUM_LEDS];
 
 // predefined color arrays (hue,saturation)
-PROGMEM byte colors[][2] = {
+PROGMEM byte const colors[][2] = {
 	{
 	64,255                                    }
 	, // yellow
