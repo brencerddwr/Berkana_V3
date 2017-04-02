@@ -262,18 +262,18 @@ void loop()
 
 	// set the cursor to column 0, line 1
 	// (note: line 1 is the second row, since counting begins with 0):
-	if (main_menu_current != main_menu_active)
+	if (main_menu_current != main_menu_active && !idle)
 	{
 		lcd.setCursor(0, 1);
 		lcd.print(main_menu[main_menu_current]);
 	}
 	//	  menu_previous = main_menu_current;
-	if ((millis()-last_button) > 7000 && !idle)
+	if ((millis()-last_button) > 5000 && !idle)
 	{
-		//		lcd.setCursor(0,0);
-		//		lcd.print("                ");
-		//		lcd.setCursor(0,0);
-		//		lcd.print("Berkana");
+		lcd.setCursor(0,0);
+		lcd.print("                ");
+		lcd.setCursor(0,0);
+		lcd.print("Berkana");
 		idle = true;
 	}
 	
@@ -349,19 +349,11 @@ void loop()
 		
 		case 9:		//custom saturation
 		lcd.setBacklight(WHITE);
-		lcd.setCursor (0,0);
-		lcd.print("                ");
-		lcd.setCursor (0,0);
-		lcd.print (customSaturation);
 		customSaturationbuttons ();
 		break;
 		
 		case 10:		//custom hue
 		lcd.setBacklight(WHITE);
-		lcd.setCursor (0,0);
-		lcd.print("                ");
-		lcd.setCursor (0,0);
-		lcd.print (customHue);
 		customHuebuttons ();
 		break;
 	}
@@ -398,15 +390,15 @@ void colorBars()
 	showAnalogRGB( CRGB::Red );
 	fill_solid ( &(leds[0]), NUM_LEDS, CRGB::Red);
 	FastLED.show();
-	delay(300);
+	delay(350);
 	showAnalogRGB( CRGB::Green );
 	fill_solid ( &(leds[0]), NUM_LEDS, CRGB::Green);
 	FastLED.show();
-	delay(300);
+	delay(350);
 	showAnalogRGB( CRGB::Blue );
 	fill_solid ( &(leds[0]), NUM_LEDS, CRGB::Blue);
 	FastLED.show();
-	delay(300);
+	delay(350);
 	showAnalogRGB( CRGB::Black );
 	fill_solid ( &(leds[0]), NUM_LEDS, CRGB::Black);
 	FastLED.show();
@@ -602,24 +594,18 @@ void menuButtonHandling()
 			last_button = millis();
 			break;
 			
-//			default:
-//			break;
+			//			default:
+			//			break;
 		}
 	}
 }
 void customSaturationbuttons()
 {
-	if (millis ()-last_button > menuDelay/3)
+	uint8_t buttons = lcd.readButtons();
+	if (buttons && millis ()-last_button > menuDelay/3)
 	{
-		uint8_t buttons = lcd.readButtons();
-		switch (buttons) {
-			
-			case (BUTTON_DOWN):
-			break;
-			
-			case (BUTTON_UP):
-			break;
-			
+		switch (buttons)
+		{
 			case (BUTTON_LEFT):
 			if (customSaturation == 0)
 			{
@@ -653,22 +639,20 @@ void customSaturationbuttons()
 			last_button = millis();
 			break;
 		}
+		lcd.setCursor (0,0);
+		lcd.print("                ");
+		lcd.setCursor (0,0);
+		lcd.print (customSaturation);
+
 	}
 }
 void customHuebuttons()
 {
-	if (millis ()-last_button > menuDelay/3)
+	uint8_t buttons = lcd.readButtons();
+	if (buttons && millis ()-last_button > menuDelay/3)
 	{
-		
-		uint8_t buttons = lcd.readButtons();
 		switch (buttons)
 		{
-			case (BUTTON_DOWN):
-			break;
-			
-			case (BUTTON_UP):
-			break;
-			
 			case (BUTTON_LEFT):
 			if (customHue == 0)
 			{
@@ -702,5 +686,10 @@ void customHuebuttons()
 			last_button = millis();
 			break;
 		}
+		lcd.setCursor (0,0);
+		lcd.print("                ");
+		lcd.setCursor (0,0);
+		lcd.print (customHue);
+
 	}
 }
