@@ -87,7 +87,7 @@
 #define WHITE 0x7
 
 // define the delay between frames in milliseconds.
-unsigned int frame_delay = 6;
+unsigned int frame_delay = 25;
 unsigned int menuDelay = 250;
 // define initial intensity levels
 byte high_intensity = 128;
@@ -145,7 +145,7 @@ unsigned int sensorValue = 512;        // value read from the pot
 
 //initialize variables
 
-byte led_color[2];  //array that holds the current color codes for the LEDS
+// byte led_color[2];  //array that holds the current color codes for the LEDS
 byte c = 0;
 unsigned long last_millis;
 unsigned long current_millis;
@@ -165,9 +165,9 @@ int x;
 
 // Kelley Pattern variables
 int F16pos = 0;
-byte F16delta = 2;
+byte F16delta = 1;
 byte Width = 3; // width of line
-unsigned int InterframeDelay = 2; //ms
+unsigned int InterframeDelay = 10; //ms
 
 // logical order arrays
 
@@ -224,8 +224,10 @@ void setup() {
 	lcd.setCursor(0,1);
 	lcd.print("Ready");
 	delay (750);
-	led_color[0] = pgm_read_dword_near(&colors[c][0]);
-	led_color[1] = pgm_read_dword_near(&colors[c][1]);
+	//	led_color[0] = pgm_read_dword_near(&colors[c][0]);
+	//	led_color[1] = pgm_read_dword_near(&colors[c][1]);
+	lcd.setCursor(0,1);
+	lcd.print(main_menu[main_menu_active]);
 	last_button=millis();
 	last_millis=millis();
 	lastLoop = millis();
@@ -240,11 +242,9 @@ void setup() {
 // ***********************************************************************************************************
 void loop()
 {
-	//unsigned long loopSpeed=millis()-lastLoop;
-	//lastLoop = millis();
 	// read the analog in value: and adjust brightness
 	sensorValue = analogRead(analogInPin);
-	brightness = constrain(map(sensorValue, 0, 1023, 90, 255),90,255);
+	brightness = constrain(map(sensorValue, 0, 1023, 80, 255),80,255);
 	if (high_intensity != brightness)
 	{
 		high_intensity = brightness;
@@ -253,8 +253,6 @@ void loop()
 	if (main_menu_current == 9 || main_menu_current == 10)
 	{
 		showAnalogRGB( CHSV( customHue, customSaturation, high_intensity) );
-		//		leds[0]=CHSV(customHue,customSaturation,high_intensity);
-		//		FastLED.show ();
 	}
 	else
 	{
@@ -264,80 +262,66 @@ void loop()
 
 	// set the cursor to column 0, line 1
 	// (note: line 1 is the second row, since counting begins with 0):
-	lcd.setCursor(0, 1);
-	lcd.print(main_menu[main_menu_current]);
-	//	  menu_previous = main_menu_current;
-	if ((millis()-last_button) > 10000 && !idle)
+	if (main_menu_current != main_menu_active)
 	{
-	//	if (idle == false)
-	//	{
-			lcd.setCursor(0,0);
-			lcd.print("                ");
-			lcd.setCursor(0,0);
-			lcd.print("Berkana");
-			idle = true;
-	//	}
-//		lcd.setCursor(0,0);
-//		lcd.print("Berkana");
+		lcd.setCursor(0, 1);
+		lcd.print(main_menu[main_menu_current]);
+	}
+	//	  menu_previous = main_menu_current;
+	if ((millis()-last_button) > 7000 && !idle)
+	{
+		//		lcd.setCursor(0,0);
+		//		lcd.print("                ");
+		//		lcd.setCursor(0,0);
+		//		lcd.print("Berkana");
+		idle = true;
 	}
 	
 	switch (main_menu_current)
 	{
 		case 0: // kelley pattern yellow
-		led_color[0] = pgm_read_dword_near(&colors[main_menu_current][0]);
-		led_color[1] = pgm_read_dword_near(&colors[main_menu_current][1]);
-		stripHue = led_color[0];
-		stripSaturation = led_color[1];
+		stripHue = pgm_read_dword_near(&colors[main_menu_current][0]);
+		stripSaturation = pgm_read_dword_near(&colors[main_menu_current][1]);
 		lcd.setBacklight(YELLOW);
 		kelley_pattern_new();
 		menuButtonHandling();
 		break;
 		
 		case 1: // kelley pattern red
-		led_color[0] = pgm_read_dword_near(&colors[main_menu_current][0]);
-		led_color[1] = pgm_read_dword_near(&colors[main_menu_current][1]);
-		stripHue = led_color[0];
-		stripSaturation = led_color[1];
+		stripHue = pgm_read_dword_near(&colors[main_menu_current][0]);
+		stripSaturation = pgm_read_dword_near(&colors[main_menu_current][1]);
 		lcd.setBacklight(RED);
 		kelley_pattern_new();
 		menuButtonHandling();
 		break;
 		
 		case 2: // kelley pattern blue
-		led_color[0] = pgm_read_dword_near(&colors[main_menu_current][0]);
-		led_color[1] = pgm_read_dword_near(&colors[main_menu_current][1]);
-		stripHue = led_color[0];
-		stripSaturation = led_color[1];
+		stripHue = pgm_read_dword_near(&colors[main_menu_current][0]);
+		stripSaturation = pgm_read_dword_near(&colors[main_menu_current][1]);
 		lcd.setBacklight(BLUE);
 		kelley_pattern_new();
 		menuButtonHandling();
 		break;
 		
 		case 3: // kelley pattern green
-		led_color[0] = pgm_read_dword_near(&colors[main_menu_current][0]);
-		led_color[1] = pgm_read_dword_near(&colors[main_menu_current][1]);
-		stripHue = led_color[0];
-		stripSaturation = led_color[1];
+		stripHue = pgm_read_dword_near(&colors[main_menu_current][0]);
+		stripSaturation = pgm_read_dword_near(&colors[main_menu_current][1]);
 		lcd.setBacklight(GREEN);
 		kelley_pattern_new();
 		menuButtonHandling();
 		break;
 		
 		case 4: // kelley pattern purple
-		led_color[0] = pgm_read_dword_near(&colors[main_menu_current][0]);
-		led_color[1] = pgm_read_dword_near(&colors[main_menu_current][1]);
-		stripHue = led_color[0];
-		stripSaturation = led_color[1];
+		stripHue = pgm_read_dword_near(&colors[main_menu_current][0]);
+		stripSaturation = pgm_read_dword_near(&colors[main_menu_current][1]);
 		lcd.setBacklight(VIOLET);
 		kelley_pattern_new();
 		menuButtonHandling();
 		break;
 		
 		case 5: // kelley pattern white
-		led_color[0] = pgm_read_dword_near(&colors[main_menu_current][0]);
-		led_color[1] = pgm_read_dword_near(&colors[main_menu_current][1]);
-		stripHue = led_color[0];
-		stripSaturation = led_color[1];
+		stripHue = pgm_read_dword_near(&colors[main_menu_current][0]);
+		stripSaturation = pgm_read_dword_near(&colors[main_menu_current][1]);
 		lcd.setBacklight(WHITE);
 		kelley_pattern_new();
 		menuButtonHandling();
@@ -458,29 +442,33 @@ void cycle_sub()
 }
 void kelley_pattern_new()
 {
-	// Update the "Fraction Bar" by 1/16th pixel every time
-	F16pos += F16delta;
-	
-	// wrap around at end
-	// remember that F16pos contains position in "16ths of a pixel"
-	// so the 'end of the strip' is ((NUM_LEDS/2) * 16)
-	if( F16pos >= ((NUM_LEDS/2) * 16))
+	if (current_millis-last_millis > InterframeDelay)
 	{
-		F16pos -= ((NUM_LEDS/2) * 16);
+		last_millis=current_millis;
+		// Update the "Fraction Bar" by 1/16th pixel every time
+		F16pos += F16delta;
+		
+		// wrap around at end
+		// remember that F16pos contains position in "16ths of a pixel"
+		// so the 'end of the strip' is ((NUM_LEDS/2) * 16)
+		if( F16pos >= ((NUM_LEDS/2) * 16))
+		{
+			F16pos -= ((NUM_LEDS/2) * 16);
+		}
+		
+		
+		// Draw everything:
+		// clear the pixel buffer
+		//	memset8( leds, 0, NUM_LEDS * sizeof(CRGB));
+		FastLED.clear();
+		
+		
+		// draw the Fractional Bar, length=4px
+		drawFractionalBar( F16pos, Width, hue / 256);
+		
+		FastLED.show();
+		//	FastLED.delay(InterframeDelay);
 	}
-	
-	
-	// Draw everything:
-	// clear the pixel buffer
-	//	memset8( leds, 0, NUM_LEDS * sizeof(CRGB));
-	FastLED.clear();
-	
-	
-	// draw the Fractional Bar, length=4px
-	drawFractionalBar( F16pos, Width, hue / 256);
-	
-	FastLED.show();
-	//	FastLED.delay(InterframeDelay);
 }
 void drawFractionalBar( int pos16, int width, uint8_t hue)
 {
@@ -518,7 +506,9 @@ void drawFractionalBar( int pos16, int width, uint8_t hue)
 		{
 			// first pixel in the bar
 			bright = firstpixelbrightness;
-			} else if( n == width ) {
+		}
+		else if( n == width )
+		{
 			// last pixel in the bar
 			bright = lastpixelbrightness;
 		}
@@ -561,9 +551,10 @@ void build_logical_arrays(int _startPosition){
 }
 void menuButtonHandling()
 {
-	if (millis ()-last_button > menuDelay)
+	uint8_t buttons = lcd.readButtons();
+
+	if (buttons && millis ()-last_button > menuDelay)
 	{
-		uint8_t buttons = lcd.readButtons();
 		switch (buttons) {
 			
 			case (BUTTON_DOWN):
@@ -597,26 +588,22 @@ void menuButtonHandling()
 			last_button = millis();
 			break;
 			
-			case (BUTTON_LEFT):
-			//<move menu up one level>
-			break;
-			
-			case (BUTTON_RIGHT):
-			//<move menu down one level>
-			break;
-			
 			case (BUTTON_SELECT):
 			main_menu_previous = main_menu_current;
 			main_menu_current = main_menu_active;
 			lcd.clear ();
+			lcd.setCursor(0,0);
+			lcd.print("Berkana");
+			lcd.setCursor(0,1);
+			lcd.print(main_menu[main_menu_current]);
 			idle = false;
 			FastLED.clear();
 			FastLED.show ();
 			last_button = millis();
 			break;
 			
-			default:
-			break;
+//			default:
+//			break;
 		}
 	}
 }
