@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Berkana_V3", "Berkana_V3.cppproj", "{F76D5858-E888-4E83-B2CF-F8DB9278D179}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F76D5858-E888-4E83-B2CF-F8DB9278D179}.Debug|AVR.ActiveCfg = Debug|AVR
+		{F76D5858-E888-4E83-B2CF-F8DB9278D179}.Debug|AVR.Build.0 = Debug|AVR
+		{F76D5858-E888-4E83-B2CF-F8DB9278D179}.Release|AVR.ActiveCfg = Release|AVR
+		{F76D5858-E888-4E83-B2CF-F8DB9278D179}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
